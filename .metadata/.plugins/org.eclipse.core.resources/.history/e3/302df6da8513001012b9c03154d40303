@@ -1,0 +1,17 @@
+package lesson01;
+
+public class HelloWorld {
+	
+	public static void main(String[] args) {
+		
+		int num1 = 1;
+		
+		while (num1 <=10) {
+			System.out.println("출력" + num1 + "테스트");
+			num1 ++;
+			
+		}
+		
+		
+	}
+}

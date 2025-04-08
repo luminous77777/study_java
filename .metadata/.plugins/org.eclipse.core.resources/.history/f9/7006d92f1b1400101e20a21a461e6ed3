@@ -1,0 +1,14 @@
+package lesson01;
+
+public class CharType {
+	public static void main(String[] args) {
+		
+		char a = 'A';
+		System.out.println("a :"+ a);
+		
+		int b = a;
+		System.out.println("b : "+ b);
+		
+		String name = "name";
+	}
+}
