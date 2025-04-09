@@ -1,6 +1,6 @@
 package lesson05;
 
-import java.util.Scanner;
+import java.util.Scanner;import java.util.concurrent.CompletableFuture;
 
 public class IfEx2 {
 	public static void main(String[] args) {
@@ -36,5 +36,8 @@ public class IfEx2 {
 		}
 		System.out.println("당신의 학점은 "+ grade +"입니다");
 		System.out.println("학점 부여 끝");
+		
+		
+		
 	}
 }
