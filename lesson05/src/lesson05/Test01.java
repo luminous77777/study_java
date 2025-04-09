@@ -85,9 +85,53 @@ public class Test01 {
 		}else
 			System.out.println("로그인 실패 : 없는 계정입니다");
 		*/
-		
+		/*
+		//ex2
 		int number;
-	}
+		
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("정수를 하나 입력해주세요 > ");
+		number = scanner.nextInt();
+		if(number % 3 == 0 || number % 2 == 0) {
+			if(number % 6 == 0) {
+				System.out.println("3배수이자 짝수");
+			}
+			else if( number%3 == 0 && !(number % 2 == 0)) {
+				System.out.println("3의 배수");
+			} else
+				System.out.println("짝수");
+		}else
+			System.out.println("3의 배수도 짝수도 아니다");
+			*/
+		
+		//ex3
+		
+		int month;
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("월을 입력해주세요 >");
+		month = scanner.nextInt();
+		
+		switch (month) {
+		case 3: case 4: case 5:{
+			System.out.println("봄");
+			break;
+		}
+		case 6: case 7: case 8:{
+			System.out.println("여름");
+			break;
+		}
+		case 9: case 10: case 11:{
+			System.out.println("가을");
+			break;
+		}
+		case 12: case 1: case 2:{
+			System.out.println("겨울");
+			break;
+		}
+		default :
+			System.out.println("잘못된 값입니다");
+		}
+	} 
 	
 		
 }
