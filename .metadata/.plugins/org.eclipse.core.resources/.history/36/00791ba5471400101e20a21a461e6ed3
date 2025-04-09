@@ -1,9 +1,0 @@
-package lesson04;
-
-public class Special {
-	public static void main(String[] args) {
-		System.out.println("실행전");
-		System.out.println(3/0d);
-		System.out.println("실행후");
-	}
-}
