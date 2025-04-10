@@ -190,7 +190,7 @@ public class Test01 {
 			System.out.println("잘못된 값입니다");
 		}
 		
-	} 
+	}
 	
 		
 }
