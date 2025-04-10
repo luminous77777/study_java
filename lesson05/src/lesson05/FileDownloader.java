@@ -2,7 +2,6 @@ package lesson05;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class FileDownloader {
