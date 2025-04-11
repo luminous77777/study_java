@@ -34,7 +34,14 @@ public class ArrEx1 {
 		
 		System.out.println(arr1);
 		System.out.println(Arrays.toString(arr1));
+		System.out.println(Arrays.toString(arr3));
 		
+		String[] arr4 = new String[3];
+		System.out.println(Arrays.toString(arr4));
 		
+		char ch = '가';
+		ch = 44032;
+		ch = '\uAC00';
+		ch = 0xac00;
 	}
 } 
