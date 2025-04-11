@@ -15,7 +15,8 @@ public class NestFor {
 			}
 			System.out.println();
 		*/
-		/*
+		// 369
+		
 		for(int i = 1; i <= 50; i ++) {
 //				System.out.printf("%d, %d, %3d, %s \n", i ,i%10, i % 10 % 3,  ? "짝" : "");
 			
@@ -34,10 +35,10 @@ public class NestFor {
 			while(tmp != 0);
 			System.out.println();
 		}
-		*/
+		
 		
 		//공약수
-		
+		/*
 		int a =12;
 		int b =18;
 		int max = 0;
@@ -50,7 +51,7 @@ public class NestFor {
 				}
 		}
 		System.out.println(max);
-		
+		*/
 		
 		
 		}
