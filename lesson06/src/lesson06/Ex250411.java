@@ -22,16 +22,37 @@ public class Ex250411 {
 		}
 		*/
 		
-	
-		
 		// 이하 코드 작성 후 갯수 출력
 		
 		// 2. 임의의 문자열 생성 exCAPTCHA생성 String [] 잘 사용
 		// 문자열의 범위는 숫자,영대,영소 10글자
 		
+		char randUpper, randLower, randNumber;
+
+		char[] captcha = new char[9];
+		int seed;
+		
+		for(int i =0; i<captcha.length;i++) {
+			seed = (int)(Math.random()*3);
+			randUpper = (char)((int)(Math.random()*26)+65);
+			randLower = (char)((int)(Math.random()*26)+97);
+			randNumber = (char)((int)(Math.random()*10)+48);
+			
+			if(seed==0) {
+				captcha[i]=randUpper;
+			}else if(seed == 1) {
+				captcha[i] = randLower;
+			}
+			else {
+				captcha[i] = (char) randNumber;
+			}
+			
+			System.out.print(captcha[i]);
+		}
+		
 		//3. 배열에 임의값 채우기 
 		//100개의 공간을 가지는 배열 (0~9 사이의 아무 값)
-		
+		/*
 		int[] number = new int[100];
 		int random_num;
 
@@ -56,7 +77,7 @@ public class Ex250411 {
 		for(int i = 0; i< count.length; i++) {
 			System.out.println(i+"의 개수는 "+count[i]+"개");
 		}
-		
+		*/
 		// 교재 연습문제 p111
 		
 		//ex1 
