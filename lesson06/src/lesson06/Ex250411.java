@@ -39,12 +39,12 @@ public class Ex250411 {
 			randNumber = (char)((int)(Math.random()*10)+48);
 			
 			if(seed==0) {
-				captcha[i]=randUpper;
+				captcha[i]= randUpper;
 			}else if(seed == 1) {
 				captcha[i] = randLower;
 			}
 			else {
-				captcha[i] = (char) randNumber;
+				captcha[i] = randNumber;
 			}
 			
 			System.out.print(captcha[i]);
@@ -54,11 +54,11 @@ public class Ex250411 {
 		//100개의 공간을 가지는 배열 (0~9 사이의 아무 값)
 		/*
 		int[] number = new int[100];
-		int random_num;
+		int randomNum;
 
 		for(int i=0; i<number.length; i++) {
-			random_num = (int)(Math.random()*10);
-			number[i]= random_num;
+			randomNum = (int)(Math.random()*10);
+			number[i]= randomNum;
 		}
 		System.out.println(Arrays.toString(number));
 
@@ -120,7 +120,7 @@ public class Ex250411 {
 			}
 		}
 		*/
-		//ex4
+		//ex4 *찍기
 		/*
 		for(int i =1; i<=5; i++) {
 			for(int j = 1; j<= 5; j++) {
@@ -142,7 +142,8 @@ public class Ex250411 {
 		*/
 		
 		/*
-		int star = 9, line= 5;
+		int line= 7;
+		int star = line*2-1;
 		for(int i =0; i<line; i++) {
 			for(int j = 1; j<=star; j++) {
 				if(j <= line+i && j >= line-i) {
@@ -154,11 +155,13 @@ public class Ex250411 {
 			System.out.println();
 		}
 		*/
+		
 		/*
 		int dice, sum=0;
+		int count =0;
 		while(true) {
 			dice = (int)(Math.random() * 6 )  +1;
-			System.out.print(dice+", ");
+			System.out.print(dice+" ");
 			sum += dice;	
 			if(dice == 6) break;
 		}
