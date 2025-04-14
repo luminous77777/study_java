@@ -24,20 +24,37 @@ public class Ex250414 {
 				
 				int[] arr1 = new int[10];
 				int[] arr2 = new int[10];
-				int count =0;
+				int count = 0;
+				
 				
 				
 				
 				for(int i=0; i<arr1.length; i++) {
-					arr1[i] = (int)(Math.random()* 20 +1);
+					boolean same = false;
 					
-					
+					arr1[i] = (int)(Math.random()* 20 +1);  //난수 생성
+					for(int j = 0; j<i;j++) { //중복체크 
+						if(arr1[j] == arr1[i]) {
+							same = true;
+							break;
+						}
 					}
-				System.out.println(Arrays.toString(arr2));
-				
-				
+					
+					if(!same) { //중복 확인후 삽입
+						arr2[count] = arr1[i];
+						count++;
+					}
 				}
 				
+				System.out.println("arr1 (중복 포함): " + Arrays.toString(arr1));
+		        System.out.print("arr2 (중복 제거): {");
+		        for (int i = 0; i < count; i++) {
+		            System.out.print(arr2[i]);
+		            if (i < count - 1) System.out.print(", ");
+		        }
+		        System.out.println("]");
+				
+
 				//3. 2차월 배열문제
 				//특정패턴. 별로 만들것. 2차월 배열로 구성
 				/*
@@ -64,3 +81,4 @@ public class Ex250414 {
 				//임의의 값 중복제거.
 				*/
 	}
+}
