@@ -24,5 +24,12 @@ args
 javac HelloWorld.java
 java HelloWorld
 
+향상된 for문
+참조자료형
+
+
+
+(문자열 상수풀 equls 쓰는 이유)
+https://velog.io/@k971119/%EB%AC%B8%EC%9E%90%EC%97%B4-%EC%83%81%EC%88%98%ED%92%80
 
 // 

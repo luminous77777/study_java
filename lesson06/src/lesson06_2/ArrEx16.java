@@ -40,15 +40,14 @@ public class ArrEx16 {
 		}
 		//챗 gpt 검색
 		int age = 30;
-		String name = "1234"; // 주소하나에 1234를 넣는다
-		String name2 = "1234"; // 같은 값을 가진 주소가 있다면 주소를 넣는다.
-		String n = new String("1234"); // String -> String 객체 생성 //공간을 새로 만든다->같은 것이 있으면 주소를 넣는다.
+		String name = "1234"; // name 는 1234 라는 값이 있는 객체 주소를 참조
+		String name2 = "1234"; // name2 는 1234 라는 값이 있는 객체 주소를 참조
+		String n = new String("1234"); // String -> String 객체 생성 //공간을 새로 만든다->값이 같은 것이 있으면 주소를 넣는다.
 		System.out.println("====================");
 		System.out.println(name);
 		System.out.println(name2); 
 		System.out.println(n);
-		System.out.println(name == name2); // 주소를 비교하기 때문에 같다
-		System.out.println(name == n); //주소가 다르기 때문에 거짓
+ 
 		
 		System.out.println(n.equals(name));
 	}
