@@ -1,8 +1,11 @@
 package lesson07_2;
 
+import java.util.Scanner;
+
 public class Overloading {
 	public static void main(String[] args) {
 	
+		Scanner scanner = new Scanner(System.in);
 		
 		Operator op = new Operator();
 		
