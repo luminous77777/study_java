@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Ex250414 {
 	public static void main(String[] args) {
-		//1. 피보나치 수열 출력 
+				//1. 피보나치 수열 출력 
 				//반복문 관련 배열은 아님
 				// 피보나치수열 숫자 20 개 출력
 				// 규칙 첫 두자리 숫자의 합이 다음 숫자의 합. 그 다음 숫자는 이전 두 숫자의 합의 연속
@@ -21,9 +21,9 @@ public class Ex250414 {
 				
 				//2.50개의 길이를 가지는 정수 배열, 각 값은 1~20사이의 숫자로 채우기
 				//이후 중복된 값을 제거한 새로운 배열을 생성
-				
-				int[] arr1 = new int[10];
-				int[] arr2 = new int[10];
+				/*
+				int[] arr1 = new int[50];
+				int[] arr2 = new int[20];
 				int count = 0;
 				
 				
@@ -31,7 +31,6 @@ public class Ex250414 {
 				
 				for(int i=0; i<arr1.length; i++) {
 					boolean same = false;
-					
 					arr1[i] = (int)(Math.random()* 20 +1);  //난수 생성
 					for(int j = 0; j<i;j++) { //중복체크 
 						if(arr1[j] == arr1[i]) {
@@ -53,10 +52,10 @@ public class Ex250414 {
 		            if (i < count - 1) System.out.print(", ");
 		        }
 		        System.out.println("]");
-				
+				*/
 
 				//3. 2차월 배열문제
-				//특정패턴. 별로 만들것. 2차월 배열로 구성
+				//특정패턴. 별로 만들것. 2차원 배열로 구성
 				/*
 				 * **
 				 * **
@@ -65,7 +64,7 @@ public class Ex250414 {
 				 * ***** 
 				 * */
 				
-				/*
+				
 				char[][] chs= {
 						{'*','*',' ',' ',' '},
 						{'*','*',' ',' ',' '},
@@ -73,12 +72,22 @@ public class Ex250414 {
 						{'*','*','*','*','*'},
 						{'*','*','*','*','*'}
 				};
+				String[][] Str= {
+						{"0,0","0,1","0,2","0,3","0,4"},
+						{"1,0","1,1","1,2","1,3","1,4"},
+						{"2,0","2,1","2,2","2,3","2,4"},
+						{"3,0","3,1","3,2","3,3","3,4"},
+						{"4,0","4,1","4,2","4,3","4,4"},
+				};
+
+				
+				System.out.println(chs[0][0] == '*');
+				System.out.println(chs[0][3] == ' ');
+				System.out.println(chs[3][2]); // '*'
 				
 				//90도 시계방향 회전의 결과를 result에 담으시오
 				char[][] result = new char[5][5];
 				// 여러번 사용할 수 있도록 만들어라
 				
-				//임의의 값 중복제거.
-				*/
 	}
 }
