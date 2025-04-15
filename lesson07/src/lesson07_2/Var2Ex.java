@@ -28,13 +28,13 @@ public class Var2Ex {
 		a1.company = "기아";
 		
 		//클래스 변수의 값
-		System.out.println("Avante 제조사 : " + Avante.company);//Avante.company로 출력하라는 추천 메시지가 출력되는 중 ,클래스명으로 출력하여라. 객체명으로는 가능한 출력 하지 말아라
+		System.out.println("Avante 제조사 : " + Avante.company); //Avante.company로 출력하라는 추천 메시지가 출력되는 중 ,클래스명으로 출력하여라. 객체명으로는 가능한 출력 하지 말아라
 		System.out.println("a1 제조사 :" + a1.company);
 		System.out.println("a2 제조사 :" + a2.company);
 	}
 }
 
-class Avante {
-	String color;
-	static String company = "현대";
+class Avante { //클래스
+	String color;  //인스턴스 변수
+	static String company = "현대";  //클래스 변수
 }
