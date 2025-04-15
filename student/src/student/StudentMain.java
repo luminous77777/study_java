@@ -7,8 +7,8 @@ public class StudentMain {
 //		String str = StudentUtils.nextLine("값을 입력하세요 >");
 //		System.out.println(str);
 //	
-//		//사용자로부터 숫자를 입력 받고 싶음
-//		System.out.println(StudentUtils.nextLine("숫자를 입력하세요 >"));
+		//사용자로부터 숫자를 입력 받고 싶음
+//		System.out.println(StudentUtils.nextInt("숫자를 입력하세요 >"));
 		
 		StudentService service = new StudentService();
 		
@@ -17,6 +17,7 @@ public class StudentMain {
 			switch (StudentUtils.nextInt("1.등록 2. 조회 3. 수정 4.삭제 5. 종료")) {
 			case 1:
 				service.register();
+				
 				break;
 			case 2:
 				service.read();
@@ -25,7 +26,7 @@ public class StudentMain {
 				service.modify();
 				break;
 			case 4:
-				service.read();
+				service.remove();
 				break;
 			case 5:
 				System.out.println("bye~");
