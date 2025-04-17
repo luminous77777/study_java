@@ -87,5 +87,9 @@ public class StudentService { // 핵심 로직 클래스
 		}
 
 	}
+	
+	//과목별 평균
+	
+	//총점 정렬
 
 }

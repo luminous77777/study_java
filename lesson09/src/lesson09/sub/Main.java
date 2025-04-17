@@ -23,7 +23,7 @@ public class Main {
 		System.out.println(human instanceof Human); //휴먼 클래스의 인스턴스 인가?
 		System.out.println(human instanceof Animal); //애니멀을 상속받았기 때문에 참
 		System.out.println(human instanceof Talkable); //톡커블을 구현했기 때문에 참
-		System.out.println(dog instanceof Talkable);//  거짓 
+		System.out.println(dog instanceof Talkable);//  거짓
 		//인스턴스가 그 타입으로 형변환 가능한가를 묻는다
 	}
 }
