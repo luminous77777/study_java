@@ -16,11 +16,16 @@ public class StudentService { // 핵심 로직 클래스
 	void register() {
 		System.out.println("등록가능, 학번은 0번부터");
 
+		
+		
 		if (count == students.length) {
 			students = Arrays.copyOf(students, students.length * 2);
 		}
 
 		int no = StudentUtils.nextInt("학번 >");
+		
+		nocheck(no);
+		
 		String name = StudentUtils.nextLine("이름 >");
 		int kor = StudentUtils.nextInt("국어 >");
 		int eng = StudentUtils.nextInt("영어>");
@@ -78,18 +83,33 @@ public class StudentService { // 핵심 로직 클래스
 	void remove() { // 학생배열에게 삭제할 인덱스 넘버를 제외하고 자기 자신에게 복사
 		System.out.println("삭제기능");
 		int no = StudentUtils.nextInt("삭제할 학생의 학번 >");
-		for(int i = 0 ; i < count ; i++) {
-			if(students[i].no == no) {
-				System.arraycopy(students, +1, students, i, count-- - 1 -i);
-//				count--;
-				break;
-			}
-		}
+		nocheck(no);
+
 
 	}
 	
 	//과목별 평균
+	void subavg() {
+		System.out.println("과목별의 평균 출력");
+		System.out.println("총평균 출력");
+	}
+	
 	
 	//총점 정렬
+	void sumsort() { 
+		System.out.println("학생들의 총점을 기준으로 석차정렬");
+	}
+	
+	boolean nocheck(int no) {
+		System.out.println("중복체크");
+		for(int i = 0 ; i < count ; i++) {
+			if(students[i].no == no) {
+				System.arraycopy(students, +1, students, i, count-- - 1 -i);
+//				count--;
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

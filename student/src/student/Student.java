@@ -61,15 +61,4 @@ public class Student {
 		return ;
 	}
 	
-	void remove() {
-		
-		return;
-	}
-	
-	void move() {
-		
-		return;
-	}
-	
-	
 }

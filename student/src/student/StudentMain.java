@@ -29,8 +29,10 @@ public class StudentMain {
 				service.remove();
 				break;
 			case 5:
+				service.subavg();
 				break;
 			case 6:
+				service.sumsort();
 				break;
 			case 7:
 				System.out.println("bye~");
