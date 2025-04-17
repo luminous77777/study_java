@@ -1,11 +1,18 @@
 package lesson08.shape;
 
-public class Shape {
-	public double circum() {
-		return 0;
-	}
+public abstract class  Shape { //abstract를 사용해서 추상클래스가 되었다
+	public abstract double circum(); 
 	
-	public double area() {
-		return 0;
-	}
+	
+//	{ //구현부는 의미가 없음 추상메서드 가 될수 있따
+//		return 0;
+//	}
+	
+	
+	
+	public abstract double area();
+	
+//	{
+//		return 0;
+//	}
 }

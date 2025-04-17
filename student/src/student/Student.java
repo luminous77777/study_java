@@ -51,7 +51,7 @@ public class Student {
 	}
 	
 	double average() { //평균기능을 처리하는 메서드
-		return (kor+eng+mat)/3;
+		return total()/3d; //출력되는 타입을 신경쓰자
 	}
 	
 	void modify(int kor, int eng, int mat) {

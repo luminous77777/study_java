@@ -6,11 +6,17 @@ public class StudentService { // 핵심 로직 클래스
 	Student[] students = new Student[2];
 	int count = 0;
 
+	{ // 초기화 블록. 기본값 매번 넣기 귀찮아서 있는것.
+		students[count++] = new Student(1, "A", 90, 80, 90);
+		students[count++] = new Student(2, "B", 90, 50, 60);
+	}
+	
+	
 	// 학생 등록
 	void register() {
 		System.out.println("등록가능, 학번은 0번부터");
 
-		if (count >= students.length) {
+		if (count == students.length) {
 			students = Arrays.copyOf(students, students.length * 2);
 		}
 
@@ -19,13 +25,8 @@ public class StudentService { // 핵심 로직 클래스
 		int kor = StudentUtils.nextInt("국어 >");
 		int eng = StudentUtils.nextInt("영어>");
 		int mat = StudentUtils.nextInt("수학 >");
-		students[count++] = new Student(no, name, kor, eng, mat);
+		students[count++] = new Student(no, name, kor, eng, mat); //생성자 호출로 데이터 입력
 
-//			students[0].no = StudentUtils.nextInt("학번을 입력하세요");
-//			students[0].name = StudentUtils.nextLine("이름을 입력하세요");
-//			students[0].kor = StudentUtils.nextInt("국어점수를 입력하세요");
-//			students[0].eng = StudentUtils.nextInt("영어점수를 입력하세요");
-//			students[0].mat = StudentUtils.nextInt("수학점수를 입력하세요");
 
 	}
 
@@ -34,65 +35,55 @@ public class StudentService { // 핵심 로직 클래스
 		System.out.println("조회 가능");
 
 		for (int i = 0; i < count; i++) {
-//			if (students[i] == null) {
-//
-//			} else
-				System.out.println(students[i].no + "," + students[i].name + "," + students[i].total() + ","
-						+ students[i].average());
+				System.out.println(students[i].no + "," + students[i].name + "," + students[i].total() + ","+ students[i].average());
 		}
-
-//		System.out.println("학번은 : "+students[0].no);
-//		System.out.println("이름은 : "+students[0].name);
-//		System.out.println("국어점수 : "+students[0].kor);
-//		System.out.println("영어점수 : "+students[0].eng);
-//		System.out.println("수학점수 : "+students[0].mat);
-//		
-//		int sum = students[0].kor + students[0].eng + students[0].mat;
-//		System.out.println("합계는 " + sum);
-//		System.out.println("세 과목의 평균은 " + sum/3);
 
 	}
 
 	// 수정
 	void modify() {
+		// 학생들 배열에서 입력받은 학번과 일치하는 학생
 		System.out.println("수정가능, 학번은 0번부터");
 		int no = StudentUtils.nextInt("학번 >");
 
-		for (int i = 0; i < count; i++) {
-			if (students[i].no == no) {
-				System.out.println("입력한 학번은 " + students[i].no);
-				int kor = StudentUtils.nextInt("국어 점수 수정 >");
-				int eng = StudentUtils.nextInt("영어 점수 수정>");
-				int mat = StudentUtils.nextInt("수학 점수 수정>");
-
-				students[i].modify(kor, eng, mat);
+		Student s = null;
+		
+		for(int i = 0; i < count ; i ++) { //메서드로 분리 가능
+			if(students[i].no == no) {
+				s = students[i];
+				break;
 			}
 		}
+		
+		s.name = StudentUtils.nextLine("이름 >");
+		s.kor = StudentUtils.nextInt("국어 >");
+		s.eng = StudentUtils.nextInt("영어>");
+		s.mat = StudentUtils.nextInt("수학 >");
+		
+		
+//		for (int i = 0; i < count; i++) {
+//			if (students[i].no == no) {
+//				System.out.println("입력한 학번은 " + students[i].no);
+//				int kor = StudentUtils.nextInt("국어 점수 수정 >");
+//				int eng = StudentUtils.nextInt("영어 점수 수정>");
+//				int mat = StudentUtils.nextInt("수학 점수 수정>");
+//
+//				students[i].modify(kor, eng, mat);
+//			}
+//		}
 
 	}
 
 	// 삭제
-	void remove() {
-		int del = 0;
-		System.out.println("삭제 가능, 학번을 입력하세요");
-		int no = StudentUtils.nextInt("학번 >");
-
-		for (int i = 0; i < count; i++) {
-			if (students[i].no == no) { // 입력한 학번이 있는 students 배열 탐색
-				System.out.println("입력한 학번은 " + students[i].no);
-				students[i] = null; // 해당배열이 삭제
+	void remove() { // 학생배열에게 삭제할 인덱스 넘버를 제외하고 자기 자신에게 복사
+		System.out.println("삭제기능");
+		int no = StudentUtils.nextInt("삭제할 학생의 학번 >");
+		for(int i = 0 ; i < count ; i++) {
+			if(students[i].no == no) {
+				System.arraycopy(students, +1, students, i, count-- - 1 -i);
+//				count--;
+				break;
 			}
-		}
-//students배열의 인덱스는 count번까지 있음
-		for (int i = 0; i < count; i++) {
-			if (students[i] == null) {
-				students[i] = students[i + 1];
-				del++;
-			} else {
-				students[i] = students[i];
-			}
-		count -= del;
-
 		}
 
 	}
