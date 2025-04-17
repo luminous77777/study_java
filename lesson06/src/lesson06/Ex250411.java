@@ -26,7 +26,7 @@ public class Ex250411 {
 		
 		// 2. 임의의 문자열 생성 exCAPTCHA생성 String [] 잘 사용
 		// 문자열의 범위는 숫자,영대,영소 10글자
-		
+		/*
 		char randUpper, randLower, randNumber;
 
 		char[] captcha = new char[9];
@@ -49,10 +49,10 @@ public class Ex250411 {
 			
 			System.out.print(captcha[i]);
 		}
-		
+		*/
 		//3. 배열에 임의값 채우기 
 		//100개의 공간을 가지는 배열 (0~9 사이의 아무 값)
-		/*
+		
 		int[] number = new int[100];
 		int randomNum;
 
@@ -77,7 +77,7 @@ public class Ex250411 {
 		for(int i = 0; i< count.length; i++) {
 			System.out.println(i+"의 개수는 "+count[i]+"개");
 		}
-		*/
+		
 		// 교재 연습문제 p111
 		
 		//ex1 
