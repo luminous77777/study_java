@@ -3,16 +3,18 @@ package student;
 import java.util.Arrays;
 
 public class StudentService { // 핵심 로직 클래스
-	Student[] students = new Student[4];
-	Student[] sortedStudents = new Student[students.length];
+	private Student[] students = new Student[4];
+	private Student[] sortedStudents = new Student[students.length];
 	
-	int count = 0;
+	private int count = 0;
 
 	{ // 초기화 블록. 기본값 매번 넣기 귀찮아서 있는것.
-		students[count++] = new Student(1, "A", 50, 80, 70);
-		students[count++] = new Student(2, "B", 90, 50, 60);
-		students[count++] = new Student(3, "C", 40, 50, 30);
-		students[count++] = new Student(4, "D", 100, 100, 100);
+		
+		
+		students[count++] = new Student(1, "A", nandScore(), nandScore(), nandScore());
+		students[count++] = new Student(2, "B", nandScore(), nandScore(), nandScore());
+		students[count++] = new Student(3, "C", nandScore(), nandScore(), nandScore());
+		students[count++] = new Student(4, "D", nandScore(), nandScore(), nandScore());
 		
 //		sortedStudents = Arrays.copyOf(students, students.length);
 		sortedStudents = students.clone();
@@ -20,8 +22,17 @@ public class StudentService { // 핵심 로직 클래스
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 학생 등록
-	void register() {
+	public void register() {
 		System.out.println("등록가능, 학번은 0번부터");
 
 		
@@ -30,6 +41,8 @@ public class StudentService { // 핵심 로직 클래스
 			students = Arrays.copyOf(students, students.length * 2);
 		}
 
+		
+		
 		int no = StudentUtils.nextInt("학번 >");
 
 		Student s = findBy(no);
@@ -49,27 +62,32 @@ public class StudentService { // 핵심 로직 클래스
 		rank();
 	}
 
+	private int nandScore() {
+		return (int)(Math.random()* 41) +60;
+	}
+	
+	
 	// 조회
-	void read() {
+	public void read() {
 		System.out.println("조회 가능");
 
 		print(students);
 
 	}
 	
-	void readOrder() { //석차순
+	public void readOrder() { //석차순
 		System.out.println("조회 기능");
 		print(sortedStudents);
 	}
 	
-	void print(Student[] stu) { // 단순 출력 기능
+	private void print(Student[] stu) { // 단순 출력 기능
 		for(int i = 0; i<count ;i++) {
 			System.out.println(stu[i]);
 		}
 	}
 
 	// 수정
-	void modify() {
+	public void modify() {
 		// 학생들 배열에서 입력받은 학번과 일치하는 학생
 		System.out.println("수정가능, 학번은 0번부터");
 		int no = StudentUtils.nextInt("학번 >");
@@ -80,18 +98,19 @@ public class StudentService { // 핵심 로직 클래스
 			System.out.println("입력된 학번이 존재하지 않습니다");
 			return;
 		}
+
+		int kor = StudentUtils.nextInt("국어 >");
+		int eng = StudentUtils.nextInt("영어>");
+		int mat = StudentUtils.nextInt("수학 >");
+		s.modify(kor, eng, mat);
 		
-		s.name = StudentUtils.nextLine("이름 >");
-		s.kor = StudentUtils.nextInt("국어 >");
-		s.eng = StudentUtils.nextInt("영어>");
-		s.mat = StudentUtils.nextInt("수학 >");
 		sortedStudents = Arrays.copyOf(students, students.length);
 		rank();
 
 	}
 
 	// 삭제
-	void remove() { // 학생배열에게 삭제할 인덱스 넘버를 제외하고 자기 자신에게 복사
+	public void remove() { // 학생배열에게 삭제할 인덱스 넘버를 제외하고 자기 자신에게 복사
 		System.out.println("삭제기능");
 		int no = StudentUtils.nextInt("삭제할 학생의 학번 >");
 		
@@ -103,7 +122,7 @@ public class StudentService { // 핵심 로직 클래스
 		}
 		
 		for(int i = 0; i < count ; i++) {
-			if(students[i].no == no) {
+			if(students[i].getNo() == no) {
 				System.arraycopy(students, i+1, students, i , count-- - 1 - i);
 				break;
 			}
@@ -116,7 +135,7 @@ public class StudentService { // 핵심 로직 클래스
 	}
 	
 	//과목별 평균
-	void allavg() {
+	public void allavg() {
 		// 국어, 영어, 수학, 전체평균
 		double avgKor = 0;
 		double avgEng = 0;
@@ -126,9 +145,9 @@ public class StudentService { // 핵심 로직 클래스
 		
 		
 		for (int i = 0; i < count; i++) { //모든학생의 국어 점수 출력
-			avgKor += students[i].kor;
-			avgEng += students[i].eng;
-			avgMat += students[i].mat;
+			avgKor += students[i].getKor();
+			avgEng += students[i].getEng();
+			avgMat += students[i].getMat();
 			avgAll += students[i].average();
 		}
 		avgKor /= (double)count;
@@ -146,7 +165,7 @@ public class StudentService { // 핵심 로직 클래스
 	
 	
 	//총점 정렬
-	void rank() { 
+	private void rank() { 
 		System.out.println("학생들의 총점을 기준으로 석차정렬");
 		
 		for(int i = 0; i <count - 1 ;i++) {
@@ -184,10 +203,10 @@ public class StudentService { // 핵심 로직 클래스
 		
 	}
 	
-	Student findBy(int no) { //중복체크, 명명 규칙
+	private Student findBy(int no) { //중복체크, 명명 규칙
 		Student student = null;
 		for(int i = 0 ; i < count ; i++) {
-			if(students[i].no == no) {
+			if(students[i].getNo() == no) {
 				student = students[i];
 				return student;
 			} 

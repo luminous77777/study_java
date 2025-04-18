@@ -17,44 +17,53 @@ public class Student {
 	
 	//인스턴스 변수로 대부분 구성
 	//고유키
-	int no;
-	String name;
-	int kor;
-	int eng;
-	int mat;
+	private int no;
+	private String name;
+	private int kor;
+	private int eng;
+	private int mat;
 
-	Student() { //기본 생성자
+	public Student() { //기본 생성자
 		
 	}
 	
-	Student(int no, String name){ //학번과 이름만 넣는 생성자, 괄호 안에 넣는 그대로 보인다.
+	public Student(int no, String name){ //학번과 이름만 넣는 생성자, 괄호 안에 넣는 그대로 보인다.
 		this.no = no;
 		this.name = name;
 	}
 	
-	Student(int no, String name, int kor, int eng, int mat){
+	public Student(int no, String name, int kor, int eng, int mat){
 		this(no,name); // 나의 다른 생성자 호출
 		this.kor = kor;
 		this.eng = eng;
 		this.mat = mat;
-		
-	
-//		this.no = no;
-//		this.name = name;
-//		this.kor = kor;
-//		this.eng = eng;
-//		this.mat = mat;
 	}
 	
-	int total() { //합계 기능을 처리하는 메서드
+	public int getKor() {
+		return kor;
+	}
+	
+	public int getEng() {
+		return eng;
+	}
+	
+	public int getMat() {
+		return mat;
+	}
+	
+	public int getNo() {
+		return no;
+	}
+	
+	public int total() { //합계 기능을 처리하는 메서드
 		return kor+eng+mat;
 	}
 	
-	double average() { //평균기능을 처리하는 메서드
+	public double average() { //평균기능을 처리하는 메서드
 		return total()/3d; //출력되는 타입을 신경쓰자
 	}
 	
-	void modify(int kor, int eng, int mat) {
+	public void modify(int kor, int eng, int mat) {
 		this.kor = kor;
 		this.eng = eng;
 		this.mat = mat;

@@ -14,7 +14,8 @@ public class StudentMain {
 		
 		System.out.println("=====================학생점수 관리 프로그램================================");
 		for(;;) { //for의 무한루프
-			switch (StudentUtils.nextInt("1.등록 2. 조회 3. 수정 4.삭제 5. 과목별 평균 6. 석차순 조회 7. 종료")) {
+			
+			try {switch (StudentUtils.nextInt("1.등록 2. 조회 3. 수정 4.삭제 5. 과목별 평균 6. 석차순 조회 7. 종료")) {
 			case 1:
 				service.register();
 				
@@ -38,8 +39,14 @@ public class StudentMain {
 				System.out.println("bye~");
 				return;
 			default:
-				break;
+				throw new Exception("없는 메뉴입니다");
 			}
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			
 		}
 		
 		
