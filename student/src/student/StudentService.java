@@ -14,7 +14,8 @@ public class StudentService { // 핵심 로직 클래스
 		students[count++] = new Student(3, "C", 40, 50, 30);
 		students[count++] = new Student(4, "D", 100, 100, 100);
 		
-		sortedStudents = Arrays.copyOf(students, students.length);
+//		sortedStudents = Arrays.copyOf(students, students.length);
+		sortedStudents = students.clone();
 		rank();
 	}
 	
@@ -147,8 +148,6 @@ public class StudentService { // 핵심 로직 클래스
 	//총점 정렬
 	void rank() { 
 		System.out.println("학생들의 총점을 기준으로 석차정렬");
-		
-		
 		
 		for(int i = 0; i <count - 1 ;i++) {
 			int idx = i;
