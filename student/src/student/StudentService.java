@@ -7,7 +7,9 @@ public class StudentService { // 핵심 로직 클래스
 	private Student[] sortedStudents = new Student[students.length];
 	
 	private int count = 0;
-
+	
+	
+	
 	{ // 초기화 블록. 기본값 매번 넣기 귀찮아서 있는것.
 		
 		
@@ -25,33 +27,58 @@ public class StudentService { // 핵심 로직 클래스
 	
 	// 학생 등록
 	public void register() {
-		System.out.println("등록가능, 학번은 0번부터");
+		System.out.println("등록가능");
 
-		
-		
-		if (count == students.length) {
-			students = Arrays.copyOf(students, students.length * 2);
-		}
+		try {
+			if (count == students.length) {
+				students = Arrays.copyOf(students, students.length * 2);
+			}
 
-		
-		
-		int no = StudentUtils.nextInt("학번 >");
-
-		Student s = findBy(no);
-		
-		if(s != null) {
-			System.out.println("중복된 학번이 존재합니다");
+			int no = StudentUtils.nextInt("학번 >");
+			if(findBy(no) != null) {
+				throw new Exception("중복된 학번입니다");
+			}else if(no < 0){
+				throw new Exception("0이상의 정수를 입려해주세요");
+			}
+			
+			
+//			Student s = findBy(no);
+//			if(s != null) {
+//				System.out.println("중복된 학번이 존재합니다");
+//				return;
+//			}
+			
+			String name = StudentUtils.nextLine("이름 >");
+			if(!(name.length()>=2 && name.length() <=4)) {
+				throw new Exception("이름은 2 글자 이상, 4글자 이하여야 한다");
+			}
+			
+			for (int i = 0; i < name.length(); i++) {
+			    char ch = name.charAt(i);
+			    if (ch < '가' || ch > '힣') {
+			        throw new Exception("이름은 한글만 입력해야 합니다.");
+			    }
+			}
+			
+			int kor = StudentUtils.nextInt("국어 >");
+			int eng = StudentUtils.nextInt("영어>");
+			int mat = StudentUtils.nextInt("수학 >");
+			if( !((kor >=0 && kor <=100) && (eng >=0 && eng<=100) && (mat >=0 && mat<=100))) {
+				throw new Exception("점수는 0부터 100사이를 입력해주세요");
+			}
+			
+			students[count++] = new Student(no, name, kor, eng, mat); //생성자 호출로 데이터 입력
+			
+			sortedStudents = Arrays.copyOf(students, students.length);
+			rank();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("처음부터 다시 해주세요");
 			return;
 		}
 		
-		String name = StudentUtils.nextLine("이름 >");
-		int kor = StudentUtils.nextInt("국어 >");
-		int eng = StudentUtils.nextInt("영어>");
-		int mat = StudentUtils.nextInt("수학 >");
-		students[count++] = new Student(no, name, kor, eng, mat); //생성자 호출로 데이터 입력
 		
-		sortedStudents = Arrays.copyOf(students, students.length);
-		rank();
+		
 	}
 
 	private int nandScore() {
@@ -90,14 +117,22 @@ public class StudentService { // 핵심 로직 클래스
 			System.out.println("입력된 학번이 존재하지 않습니다");
 			return;
 		}
-
-		int kor = StudentUtils.nextInt("국어 >");
-		int eng = StudentUtils.nextInt("영어>");
-		int mat = StudentUtils.nextInt("수학 >");
-		s.modify(kor, eng, mat);
+		try {
+			int kor = StudentUtils.nextInt("국어 >");
+			int eng = StudentUtils.nextInt("영어>");
+			int mat = StudentUtils.nextInt("수학 >");
+			
+			if( !((kor >=0 && kor <=100) && (eng >=0 && eng<=100) && (mat >=0 && mat<=100))) {
+				throw new Exception("점수는 0부터 100사이를 입력해주세요");
+			}
+			s.modify(kor, eng, mat);
+			sortedStudents = Arrays.copyOf(students, students.length);
+			rank();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
-		sortedStudents = Arrays.copyOf(students, students.length);
-		rank();
+		
 
 	}
 
