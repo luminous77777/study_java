@@ -23,14 +23,6 @@ public class StudentService { // 핵심 로직 클래스
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	// 학생 등록
 	public void register() {
 		System.out.println("등록가능, 학번은 0번부터");
