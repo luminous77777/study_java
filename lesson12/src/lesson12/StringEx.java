@@ -1,6 +1,7 @@
 package lesson12;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class StringEx {
 	public static void main(String[] args) {
@@ -59,9 +60,29 @@ public class StringEx {
 		String[] list = dir.list();
 		
 		for(String s : list) {
-			if(!(s.startsWith("lesson"))) {
+			if(!s.startsWith("lesson")) {
 				System.out.println(s);				
 			}
 		}
+		System.out.println("========================================");
+		
+		// 문자열 > 문자열 배열
+		String[] strs = str.split("c");
+		System.out.println(Arrays.toString(strs));
+		// 문자열 배열 > 문자열
+		System.out.println(String.join("+", strs));
+		
+		
+		
+		//문자열 > 문자 배열
+		char[] chs = str.toCharArray();
+		for(char c : chs) {
+			System.out.print(c);
+		}
+		System.out.println();
+		//문자 배열 > 문자열
+		String str2 = new String(chs);
+		System.out.println(str2);
+		
 	}
 }

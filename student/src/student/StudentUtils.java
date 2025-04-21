@@ -13,5 +13,11 @@ public class StudentUtils {
 	public static int nextInt(String msg) {
 		return Integer.parseInt(nextLine(msg));
 	}
+	
+	public static boolean nextConfirm(String msg) {
+		String s = nextLine(msg);
+		return s.equalsIgnoreCase("y") || s.equalsIgnoreCase("yes");
+		
+	}
 
 }
