@@ -26,7 +26,7 @@ public class WrapperEx {
 		long l = Long.parseLong("1234");
 		boolean b = Boolean.parseBoolean("true");
 		
-		String input = "";
+		String input = "";                                                                                                                                                                                                                                                                    
 		boolean c = input.equals("Y");
 		System.out.println(b);
 	}
