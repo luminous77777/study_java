@@ -1,9 +1,8 @@
 package lesson08.shape;
 
-public class TriangularPrism extends SolidShape{ // 직각삼각 기둥
+public class TriangularPrism extends Shape3D{ // 직각삼각 기둥
 
 	int x,y;
-	double height;
 	
 	public TriangularPrism(int x, int y, double height ) {
 		this.x = x;

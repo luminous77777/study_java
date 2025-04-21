@@ -1,6 +1,6 @@
 package lesson08.shape;
 
-public class RightTright extends PlaneShape {
+public class RightTright extends Plane2D {
 
 	int x,y;
 	

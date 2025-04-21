@@ -1,6 +1,6 @@
 package lesson08.shape;
 
-public class Rect extends PlaneShape{
+public class Rect extends Shape implements Plane2D{
 	int x,y; 
 	
 	public Rect(){}

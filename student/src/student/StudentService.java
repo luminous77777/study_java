@@ -12,16 +12,45 @@ public class StudentService { // 핵심 로직 클래스
 	
 	{ // 초기화 블록. 기본값 매번 넣기 귀찮아서 있는것.
 		
-		
-		students[count++] = new Student(1, "A", nandScore(), nandScore(), nandScore());
-		students[count++] = new Student(2, "B", nandScore(), nandScore(), nandScore());
-		students[count++] = new Student(3, "C", nandScore(), nandScore(), nandScore());
-		students[count++] = new Student(4, "D", nandScore(), nandScore(), nandScore());
+		students[count++] = new Student(1, "A", randScore(), randScore(), randScore());
+		students[count++] = new Student(2, "B", randScore(), randScore(), randScore());
+		students[count++] = new Student(3, "C", randScore(), randScore(), randScore());
+		students[count++] = new Student(4, "D", randScore(), randScore(), randScore()); //랜덤값을 적게 하기.
 		
 //		sortedStudents = Arrays.copyOf(students, students.length);
 		sortedStudents = students.clone();
 		rank();
 	}
+	
+	private int randScore() {
+		return (int)(Math.random()* 41 +60);
+	}
+	
+	
+	public void checkRange(String subject,int input ,int start, int end) { //범위체크, 예외처리 메서드
+		boolean ret = true;
+		if(input < start || input > end) {
+			throw new IllegalArgumentException(subject + "값의 범위가 벗어났습니다." +start +"~"+end+"사이의 입력을 해주세요");
+		}
+	}
+	public void checkRange(String subjectg, int input) { //오버로딩
+		checkRange(subjectg, input,0,100);
+	}
+	
+	public String inputName() {
+		String name = StudentUtils.nextLine("이름 >");
+		if(name.length()<2 || name.length() >4) {
+		throw new IllegalArgumentException("이름은 2 글자 이상, 4글자 이하여야 한다");
+		}
+		
+		for (int i = 0; i < name.length(); i++) {
+	    if (name.charAt(i) < '가' || name.charAt(i) > '힣') {
+	        throw new IllegalArgumentException("이름은 한글만 입력해야 합니다.");
+	    }
+	}
+	return name;
+	}
+	
 	
 	
 	
@@ -29,67 +58,51 @@ public class StudentService { // 핵심 로직 클래스
 	public void register() {
 		System.out.println("등록가능");
 
-		try {
+		
 			if (count == students.length) {
 				students = Arrays.copyOf(students, students.length * 2);
 			}
 
 			int no = StudentUtils.nextInt("학번 >");
-			if(findBy(no) != null) {
-				throw new Exception("중복된 학번입니다");
-			}else if(no < 0){
-				throw new Exception("0이상의 정수를 입려해주세요");
-			}
-			
-			
-//			Student s = findBy(no);
-//			if(s != null) {
-//				System.out.println("중복된 학번이 존재합니다");
-//				return;
+//			if(findBy(no) != null) {
+//				throw new Exception("중복된 학번입니다");
+//			}else if(no < 0){
+//				throw new Exception("0이상의 정수를 입려해주세요");
 //			}
 			
-			String name = StudentUtils.nextLine("이름 >");
-			if(!(name.length()>=2 && name.length() <=4)) {
-				throw new Exception("이름은 2 글자 이상, 4글자 이하여야 한다");
+			Student s = findBy(no);
+			if(s != null) {
+				System.out.println("중복된 학번이 존재합니다");
+				return;
 			}
 			
-			for (int i = 0; i < name.length(); i++) {
-			    char ch = name.charAt(i);
-			    if (ch < '가' || ch > '힣') {
-			        throw new Exception("이름은 한글만 입력해야 합니다.");
-			    }
-			}
+//			String name = StudentUtils.nextLine("이름 >");
+
+			String name = inputName(); 
+
 			
 			int kor = StudentUtils.nextInt("국어 >");
+			checkRange("국어",kor); //예외처리 메서드
+			
 			int eng = StudentUtils.nextInt("영어>");
+			checkRange("영어",eng);
 			int mat = StudentUtils.nextInt("수학 >");
-			if( !((kor >=0 && kor <=100) && (eng >=0 && eng<=100) && (mat >=0 && mat<=100))) {
-				throw new Exception("점수는 0부터 100사이를 입력해주세요");
-			}
+			checkRange("수학",mat);
+
 			
 			students[count++] = new Student(no, name, kor, eng, mat); //생성자 호출로 데이터 입력
 			
 			sortedStudents = Arrays.copyOf(students, students.length);
 			rank();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println("처음부터 다시 해주세요");
-			return;
-		}
-		
-		
 		
 	}
 
-	private int nandScore() {
-		return (int)(Math.random()* 41) +60;
-	}
+	
 	
 	
 	// 조회
 	public void read() {
 		System.out.println("조회 가능");
-
 		print(students);
 
 	}
@@ -117,20 +130,21 @@ public class StudentService { // 핵심 로직 클래스
 			System.out.println("입력된 학번이 존재하지 않습니다");
 			return;
 		}
-		try {
+
 			int kor = StudentUtils.nextInt("국어 >");
-			int eng = StudentUtils.nextInt("영어>");
-			int mat = StudentUtils.nextInt("수학 >");
+			checkRange("국어",kor);
 			
-			if( !((kor >=0 && kor <=100) && (eng >=0 && eng<=100) && (mat >=0 && mat<=100))) {
-				throw new Exception("점수는 0부터 100사이를 입력해주세요");
-			}
-			s.modify(kor, eng, mat);
+			int eng = StudentUtils.nextInt("영어>");
+			checkRange("영어",eng);
+			
+			int mat = StudentUtils.nextInt("수학 >");
+			checkRange("수학",mat);
+			
+
+			s.modify(kor, eng, mat); //setter로 하나씩 바꾸는 방법도 있다
 			sortedStudents = Arrays.copyOf(students, students.length);
 			rank();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+
 		
 		
 
@@ -162,7 +176,7 @@ public class StudentService { // 핵심 로직 클래스
 	}
 	
 	//과목별 평균
-	public void allavg() {
+	public void allAvg() {
 		// 국어, 영어, 수학, 전체평균
 		double avgKor = 0;
 		double avgEng = 0;

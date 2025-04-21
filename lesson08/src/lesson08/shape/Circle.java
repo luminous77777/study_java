@@ -1,6 +1,6 @@
 package lesson08.shape;
 
-public class Circle extends PlaneShape {
+public class Circle implements Plane2D {
 	int r;
 	public Circle() {}
 	public Circle(int r) {

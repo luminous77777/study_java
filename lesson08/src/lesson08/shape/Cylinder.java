@@ -1,26 +1,27 @@
 package lesson08.shape;
 
-public class Cylinder extends SolidShape{ //원기둥
+public class Cylinder extends Shape implements Shape3D{ //원기둥
 	
-	int r;
-	final double PI = Math.PI;
-	double height;
+	Circle circle;
+	int z;
 	
-	
-	public Cylinder(int r, double height) {
-		this.r = r;
-		setHeight(height);
+	public Cylinder() {
+		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public double surfaceArea() {
-		
-		return 2*PI*r*getHeight() + 2*PI*r*r;
+	
+	Cylinder(Circle circle, int z){
+		this.circle = circle;
+		this.z = z;
 	}
-
-	@Override
+	
+	public double area() {
+		return circle.area() *2 + circle.circum() *2;
+	}
+	
 	public double volume() {
-		return PI*r*r*getHeight();
+		return circle.area()* z;
+		
 	}
+	
 
 }

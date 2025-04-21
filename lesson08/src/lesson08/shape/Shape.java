@@ -1,5 +1,10 @@
 package lesson08.shape;
 
-interface Shape {
+public abstract class Shape {
 
+	public abstract double area();
+	
+	public String toString() {
+		return "넓이 : " + area();
+	}
 }

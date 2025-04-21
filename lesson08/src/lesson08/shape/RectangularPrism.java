@@ -1,9 +1,8 @@
 package lesson08.shape;
 
-public class RectangularPrism extends SolidShape{ //육면체
+public class RectangularPrism extends Shape3D{ //육면체
 
 	int x,y;
-	double height;
 	
 	public RectangularPrism(int x, int y, double height) {
 		this.x = x;
