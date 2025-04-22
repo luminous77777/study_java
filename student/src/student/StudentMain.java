@@ -14,13 +14,11 @@ public class StudentMain {
 		
 		System.out.println("=====================학생점수 관리 프로그램================================");
 		for(;;) { //for의 무한루프
-			
 			try {
-				
-				switch (StudentUtils.nextInt("1.등록 2. 조회 3. 수정 4.삭제 5. 과목별 평균 6. 석차순 조회 7. 종료")) {
+				switch (
+						StudentUtils.nextInt("1.등록 2. 조회 3. 수정 4.삭제 5. 과목별 평균 6. 석차순 조회 7. 종료")) {
 				case 1:
 					service.register();
-					
 					break;
 				case 2:
 					service.read();

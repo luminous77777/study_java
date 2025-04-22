@@ -1,24 +1,33 @@
 package student;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class StudentService { // 핵심 로직 클래스
-	private Student[] students = new Student[4];
-	private Student[] sortedStudents = new Student[students.length];
+	private List<Student> students = new ArrayList<Student>();
 	
-	private int count = 0;
+	private List<Student> sortedStudents = new ArrayList<Student>();
+	
+//	private Student[] students = new Student[4];
+//	private Student[] sortedStudents = new Student[students.length];
+	
+//	private int count = 0;
 	
 	
 	
 	{ // 초기화 블록. 기본값 매번 넣기 귀찮아서 있는것.
 		
-		students[count++] = new Student(1, "A", randScore(), randScore(), randScore());
-		students[count++] = new Student(2, "B", randScore(), randScore(), randScore());
-		students[count++] = new Student(3, "C", randScore(), randScore(), randScore());
-		students[count++] = new Student(4, "D", randScore(), randScore(), randScore()); //랜덤값을 적게 하기.
+		students.add(new Student(1, "A", randScore(),randScore(),randScore()));
+		students.add(new Student(2, "B", randScore(),randScore(),randScore()));
+		students.add(new Student(3, "C", randScore(),randScore(),randScore()));
+		students.add(new Student(4, "D", randScore(),randScore(),randScore()));
+		
+//		students[count++] = new Student(1, "A", randScore(), randScore(), randScore());//랜덤값을 적게 하기.
+
 		
 //		sortedStudents = Arrays.copyOf(students, students.length);
-		sortedStudents = students.clone();
+		sortedStudents = List.copyOf(students);  // 이것을 해결해야
 		rank();
 	}
 	
@@ -59,9 +68,9 @@ public class StudentService { // 핵심 로직 클래스
 		System.out.println("등록가능");
 
 		
-			if (count == students.length) {
-				students = Arrays.copyOf(students, students.length * 2);
-			}
+//			if (count == students.length) { list로 변경했으므로 필요없어짐
+//				students = Arrays.copyOf(students, students.length * 2);
+//			}
 
 			int no = StudentUtils.nextInt("학번 >");
 //			if(findBy(no) != null) {
@@ -90,9 +99,9 @@ public class StudentService { // 핵심 로직 클래스
 			checkRange("수학",mat);
 
 			
-			students[count++] = new Student(no, name, kor, eng, mat); //생성자 호출로 데이터 입력
+			students.add(new Student(no, name, kor, eng, mat)); //생성자 호출로 데이터 입력
 			
-			sortedStudents = Arrays.copyOf(students, students.length);
+			sortedStudents = List.copyOf(students);
 			rank();
 		
 	}
@@ -112,9 +121,9 @@ public class StudentService { // 핵심 로직 클래스
 		print(sortedStudents);
 	}
 	
-	private void print(Student[] stu) { // 단순 출력 기능
-		for(int i = 0; i<count ;i++) {
-			System.out.println(stu[i]);
+	private void print(List<Student> stu) { // 단순 출력 기능
+		for(int i = 0; i<stu.size() ;i++) {
+			System.out.println(stu.get(i));
 		}
 	}
 
@@ -142,7 +151,7 @@ public class StudentService { // 핵심 로직 클래스
 			
 
 			s.modify(kor, eng, mat); //setter로 하나씩 바꾸는 방법도 있다
-			sortedStudents = Arrays.copyOf(students, students.length);
+			sortedStudents = List.copyOf(students);
 			rank();
 
 		
@@ -162,14 +171,15 @@ public class StudentService { // 핵심 로직 클래스
 			return;
 		}
 		
-		for(int i = 0; i < count ; i++) {
-			if(students[i].getNo() == no) {
-				System.arraycopy(students, i+1, students, i , count-- - 1 - i);
+		for(int i = 0; i < students.size() ; i++) {
+			if(students.get(i).getNo() == no) {
+				students.remove(i);
+//				System.arraycopy(students, i+1, students, i , count-- - 1 - i);
 				break;
 			}
 		}
 		
-		sortedStudents = Arrays.copyOf(students, students.length);
+		sortedStudents = List.copyOf(students);
 		rank();
 
 
@@ -185,19 +195,19 @@ public class StudentService { // 핵심 로직 클래스
 		
 		
 		
-		for (int i = 0; i < count; i++) { //모든학생의 국어 점수 출력
-			avgKor += students[i].getKor();
-			avgEng += students[i].getEng();
-			avgMat += students[i].getMat();
-			avgAll += students[i].average();
+		for (int i = 0; i < students.size(); i++) { //모든학생의 국어 점수 출력
+			avgKor += students.get(i).getKor();
+			avgEng += students.get(i).getEng();
+			avgMat += students.get(i).getMat();
+			avgAll += students.get(i).average();
 		}
-		avgKor /= (double)count;
-		avgEng /= (double)count;
-		avgMat /= (double)count;
+		avgKor /= (double)students.size();
+		avgEng /= (double)students.size();
+		avgMat /= (double)students.size();
 		
 		avgAll = (avgKor + avgEng + avgMat)/3;
 		
-		System.out.println(count + "명 학생 평균");
+		System.out.println(students.size() + "명 학생 평균");
 		System.out.println("국어 평균" + avgKor);
 		System.out.println("영어 평균" + avgEng);
 		System.out.println("수학 평균" + avgMat);
@@ -209,25 +219,31 @@ public class StudentService { // 핵심 로직 클래스
 	private void rank() { 
 		System.out.println("학생들의 총점을 기준으로 석차정렬");
 		
-		for(int i = 0; i <count - 1 ;i++) {
+//		for(int i = 0 ; i < sortedStudents.size() - 1 ; i++ ) {
+//			int idx = i; // 임시 인덱스
+//			for(int j = 1 + i; j < sortedStudents.size() ; j ++) { //중복없이 모든 학생과 비교
+//				if(sortedStudents.get(idx).total() > sortedStudents.get(j).total()) { //이전 리스트 보다 다음 리스트가 클 경우
+//					idx = j; // 
+//				}
+//			}
+//			
+//		}
+		
+		
+		for(int i = 0; i <sortedStudents.size() - 1 ;i++) {
 			int idx = i;
-			for(int j = 1 + i; j < count ; j++) {
-				if(sortedStudents[idx].total() < sortedStudents[j].total()) {
+			for(int j = 1 + i; j < sortedStudents.size() ; j++) {
+				if(sortedStudents.get(idx).total() < sortedStudents.get(j).total()) {
 					idx = j;
 				}
 			}
-			Student tmp = sortedStudents[i];
-			sortedStudents[i] = sortedStudents[idx];
-			sortedStudents[idx] = tmp;
+			Student tmp = sortedStudents.get(i);
+			sortedStudents.set(i, sortedStudents.get(idx));
+			
+//			sortedStudents[i] = sortedStudents[idx];
+			sortedStudents.set(idx, tmp);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
+					
 //		int[] arr = {5,4,3,2,1}; // 버블 정렬의 과정예시
 //		for(int i = 0; i < arr.length-1; i++) {
 //			System.out.println(i+1+"회차");
@@ -246,9 +262,9 @@ public class StudentService { // 핵심 로직 클래스
 	
 	private Student findBy(int no) { //중복체크, 명명 규칙
 		Student student = null;
-		for(int i = 0 ; i < count ; i++) {
-			if(students[i].getNo() == no) {
-				student = students[i];
+		for(int i = 0 ; i < students.size() ; i++) {
+			if(students.get(i).getNo() == no) {
+				student = students.get(i);
 				return student;
 			} 
 		}

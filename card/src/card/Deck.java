@@ -1,12 +1,16 @@
 package card;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Deck {
-	int count =0;
-	Card[] cards = new Card[52]; //초기값 널값
+	List<Card> cards = new ArrayList<Card>();
+	
 	{ // 초기화 블럭
 		for(int i = 0; i <4 ;i++) { //아니면 카운트로 하여도 된다
 			for(int j = 0; j <13 ; j++) {
-				cards[i * 13 + j] = new Card(i, j);
+				cards.add(new Card(i,j));
 			}
 		}
 	}
@@ -19,17 +23,18 @@ public class Deck {
 	}
 	
 	Deck shuffle() {
-		for(int i = 0; i < cards.length ; i++) {
-			int r = (int)(Math.random() * 52);
-			Card tmp = cards[i];
-			cards[i] = cards[r];
-			cards[r] = tmp;
-		}
+//		for(int i = 0; i < cards.size() ; i++) {
+//			int r = (int)(Math.random() * 52);
+//			Card tmp = cards.get(i);
+//			cards.set(i, cards.get(r));
+//			cards.set(r, tmp);
+//		}
+		Collections.shuffle(cards);
 		return this;
 	}
 	
 	Card pick() {
-		return cards[count++];
+		return cards.remove(cards.size()-1);
 	}
 	
 	public static void main(String[] args) {
