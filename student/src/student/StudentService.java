@@ -27,7 +27,7 @@ public class StudentService { // 핵심 로직 클래스
 
 		
 //		sortedStudents = Arrays.copyOf(students, students.length);
-		sortedStudents = List.copyOf(students);  // 이것을 해결해야
+		sortedStudents.addAll(students);  // 이것을 해결해야
 		rank();
 	}
 	
@@ -48,12 +48,13 @@ public class StudentService { // 핵심 로직 클래스
 	
 	public String inputName() {
 		String name = StudentUtils.nextLine("이름 >");
-		if(name.length()<2 || name.length() >4) {
+		if(!(name.matches("^.{2,4}$"))) {
 		throw new IllegalArgumentException("이름은 2 글자 이상, 4글자 이하여야 한다");
 		}
 		
+		
 		for (int i = 0; i < name.length(); i++) {
-	    if (name.charAt(i) < '가' || name.charAt(i) > '힣') {
+	    if (!(name.matches("^[가-힣]+$"))) {
 	        throw new IllegalArgumentException("이름은 한글만 입력해야 합니다.");
 	    }
 	}
@@ -130,7 +131,7 @@ public class StudentService { // 핵심 로직 클래스
 	// 수정
 	public void modify() {
 		// 학생들 배열에서 입력받은 학번과 일치하는 학생
-		System.out.println("수정가능, 학번은 0번부터");
+		System.out.println("수정가능");
 		int no = StudentUtils.nextInt("학번 >");
 
 		Student s = findBy(no);
