@@ -1,9 +1,13 @@
 package lesson14;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Ex250423 {
 	public static void main(String[] args) {
+		
 //		1.학생의 정렬을 리스트의 sort로 변환
 //		컨퍼레이터를 정의해라.
 		
@@ -15,12 +19,38 @@ public class Ex250423 {
 		
 		
 		String str = "aaaaaaaabbbbbbbbbbcccccccccccddddddddd";
-
+		countLetters letters = new countLetters(str);
+		letters.count();
 		//{a:12개 ,b:13개 ,c:13개 ,d:17}
-		
-		
-		System.out.println(str);
+	}
+}
+
+class countLetters{
+	String str;
+	String[] tmp;
+	public countLetters(String str) {
+		super();
+		this.str = str;
 	}
 	
+	public void count() {
+		String[] tmp = str.split("");
+		Map<String, Integer> map = new HashMap<>();
+		
+		for (String s : tmp) {
+            if (s.matches("[a-zA-Z]")) {
+            	if (map.containsKey(s)) {
+            	    map.put(s, map.get(s) + 1); // 이미 존재하면 값 증가
+            	} else {
+            	    map.put(s, 1); // 처음 등장한 문자면 1로 초기화
+            	}
+            }
+        }
+		
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + "의 개수 : " + entry.getValue());
+        }
 	
+	}
+
 }
