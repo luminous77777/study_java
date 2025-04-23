@@ -1,13 +1,12 @@
 package student;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class StudentService { // 핵심 로직 클래스
 	private List<Student> students = new ArrayList<Student>();
 	
-	private List<Student> sortedStudents = new ArrayList<Student>();
+	private List<Student> sortedStudent;   /*= new ArrayList<Student>();*/
 	
 //	private Student[] students = new Student[4];
 //	private Student[] sortedStudents = new Student[students.length];
@@ -27,7 +26,7 @@ public class StudentService { // 핵심 로직 클래스
 
 		
 //		sortedStudents = Arrays.copyOf(students, students.length);
-		sortedStudents.addAll(students);  // 이것을 해결해야
+		sortedStudent = new ArrayList<Student>(students);
 		rank();
 	}
 	
@@ -48,16 +47,11 @@ public class StudentService { // 핵심 로직 클래스
 	
 	public String inputName() {
 		String name = StudentUtils.nextLine("이름 >");
-		if(!(name.matches("^.{2,4}$"))) {
-		throw new IllegalArgumentException("이름은 2 글자 이상, 4글자 이하여야 한다");
+
+		if(!name.matches("[가-힣]{2,4}")) {
+			throw new IllegalArgumentException("이름은 2~4글자 한글만 입력해야 합니다.");
 		}
 		
-		
-		for (int i = 0; i < name.length(); i++) {
-	    if (!(name.matches("^[가-힣]+$"))) {
-	        throw new IllegalArgumentException("이름은 한글만 입력해야 합니다.");
-	    }
-	}
 	return name;
 	}
 	
@@ -99,10 +93,9 @@ public class StudentService { // 핵심 로직 클래스
 			int mat = StudentUtils.nextInt("수학 >");
 			checkRange("수학",mat);
 
-			
-			students.add(new Student(no, name, kor, eng, mat)); //생성자 호출로 데이터 입력
-			
-			sortedStudents = List.copyOf(students);
+			Student tmp = new Student(no, name, kor, eng, mat);
+			students.add(tmp); //생성자 호출로 데이터 입력
+			sortedStudent.add(tmp);
 			rank();
 		
 	}
@@ -119,13 +112,15 @@ public class StudentService { // 핵심 로직 클래스
 	
 	public void readOrder() { //석차순
 		System.out.println("조회 기능");
-		print(sortedStudents);
+		print(sortedStudent);
 	}
 	
 	private void print(List<Student> stu) { // 단순 출력 기능
 		for(int i = 0; i<stu.size() ;i++) {
 			System.out.println(stu.get(i));
 		}
+		
+		// stu.forEach(s-> System.out.println(s));
 	}
 
 	// 수정
@@ -152,7 +147,6 @@ public class StudentService { // 핵심 로직 클래스
 			
 
 			s.modify(kor, eng, mat); //setter로 하나씩 바꾸는 방법도 있다
-			sortedStudents = List.copyOf(students);
 			rank();
 
 		
@@ -172,16 +166,15 @@ public class StudentService { // 핵심 로직 클래스
 			return;
 		}
 		
-		for(int i = 0; i < students.size() ; i++) {
-			if(students.get(i).getNo() == no) {
-				students.remove(i);
-//				System.arraycopy(students, i+1, students, i , count-- - 1 - i);
-				break;
-			}
-		}
-		
-		sortedStudents = List.copyOf(students);
-		rank();
+		students.remove(s);
+		sortedStudent.remove(s);
+//		for(int i = 0; i < students.size() ; i++) {
+//			if(students.get(i).getNo() == no) {
+//				students.remove(i);
+////				System.arraycopy(students, i+1, students, i , count-- - 1 - i);
+//				break;
+//			}
+//		}
 
 
 	}
@@ -189,26 +182,29 @@ public class StudentService { // 핵심 로직 클래스
 	//과목별 평균
 	public void allAvg() {
 		// 국어, 영어, 수학, 전체평균
+//		students.stream().map(s->s.getKor()).
+		
 		double avgKor = 0;
 		double avgEng = 0;
 		double avgMat = 0;
 		double avgAll = 0;
 		
 		
+		int size = students.size();
 		
-		for (int i = 0; i < students.size(); i++) { //모든학생의 국어 점수 출력
+		for (int i = 0; i < size; i++) { //모든학생의 국어 점수 출력
 			avgKor += students.get(i).getKor();
 			avgEng += students.get(i).getEng();
 			avgMat += students.get(i).getMat();
 			avgAll += students.get(i).average();
 		}
-		avgKor /= (double)students.size();
-		avgEng /= (double)students.size();
-		avgMat /= (double)students.size();
+		avgKor /= (double)size;
+		avgEng /= (double)size;
+		avgMat /= (double)size;
 		
 		avgAll = (avgKor + avgEng + avgMat)/3;
 		
-		System.out.println(students.size() + "명 학생 평균");
+		System.out.println(size + "명 학생 평균");
 		System.out.println("국어 평균" + avgKor);
 		System.out.println("영어 평균" + avgEng);
 		System.out.println("수학 평균" + avgMat);
@@ -220,29 +216,18 @@ public class StudentService { // 핵심 로직 클래스
 	private void rank() { 
 		System.out.println("학생들의 총점을 기준으로 석차정렬");
 		
-//		for(int i = 0 ; i < sortedStudents.size() - 1 ; i++ ) {
-//			int idx = i; // 임시 인덱스
-//			for(int j = 1 + i; j < sortedStudents.size() ; j ++) { //중복없이 모든 학생과 비교
-//				if(sortedStudents.get(idx).total() > sortedStudents.get(j).total()) { //이전 리스트 보다 다음 리스트가 클 경우
-//					idx = j; // 
-//				}
-//			}
-//			
-//		}
-		
-		
-		for(int i = 0; i <sortedStudents.size() - 1 ;i++) {
+		for(int i = 0; i <sortedStudent.size() - 1 ;i++) {
 			int idx = i;
-			for(int j = 1 + i; j < sortedStudents.size() ; j++) {
-				if(sortedStudents.get(idx).total() < sortedStudents.get(j).total()) {
+			for(int j = 1 + i; j < sortedStudent.size() ; j++) {
+				if(sortedStudent.get(idx).total() < sortedStudent.get(j).total()) {
 					idx = j;
 				}
 			}
-			Student tmp = sortedStudents.get(i);
-			sortedStudents.set(i, sortedStudents.get(idx));
+			Student tmp = sortedStudent.get(i);
+			sortedStudent.set(i, sortedStudent.get(idx));
 			
 //			sortedStudents[i] = sortedStudents[idx];
-			sortedStudents.set(idx, tmp);
+			sortedStudent.set(idx, tmp);
 		}
 					
 //		int[] arr = {5,4,3,2,1}; // 버블 정렬의 과정예시
