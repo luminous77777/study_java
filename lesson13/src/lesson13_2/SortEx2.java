@@ -19,9 +19,9 @@ public class SortEx2 {
 			}
 		};
 		
-//		l.sort(comparator);
-//		System.out.println(l);
-//		
+		l.sort(comparator);
+		System.out.println(l);
+		
 //		l.sort(new Comparator<Integer>(){
 //
 //			@Override
@@ -35,7 +35,7 @@ public class SortEx2 {
 //			return o2 - o1;
 //			});
 		
-		l.sort((o1,o2) -> o2- o1);
+//		l.sort((o1,o2) -> o2- o1);
 		
 	}
 }

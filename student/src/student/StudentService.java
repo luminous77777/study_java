@@ -1,7 +1,10 @@
 package student;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 
 public class StudentService { // 핵심 로직 클래스
 	private List<Student> students = new ArrayList<Student>();
@@ -17,10 +20,11 @@ public class StudentService { // 핵심 로직 클래스
 	
 	{ // 초기화 블록. 기본값 매번 넣기 귀찮아서 있는것.
 		
-		students.add(new Student(1, "A", randScore(),randScore(),randScore()));
-		students.add(new Student(2, "B", randScore(),randScore(),randScore()));
-		students.add(new Student(3, "C", randScore(),randScore(),randScore()));
-		students.add(new Student(4, "D", randScore(),randScore(),randScore()));
+		students.add(new Student(4, "A", randScore(),randScore(),randScore()));
+		students.add(new Student(5, "B", randScore(),randScore(),randScore()));
+		students.add(new Student(8, "C", randScore(),randScore(),randScore()));
+		students.add(new Student(2, "D", randScore(),randScore(),randScore()));
+		students.add(Student.builder().no(6).eng(randScore()).kor(randScore()).mat(randScore()).name("kkim").build());
 		
 //		students[count++] = new Student(1, "A", randScore(), randScore(), randScore());//랜덤값을 적게 하기.
 
@@ -29,6 +33,17 @@ public class StudentService { // 핵심 로직 클래스
 		sortedStudent = new ArrayList<Student>(students);
 		rank();
 	}
+	
+	
+	private static StudentService studentService = new StudentService(); // 한번만 초기화
+	private StudentService() { // 생성자를 직접생성 금지
+		
+	}
+	
+	public static StudentService getInstance() {
+		return studentService;
+	}
+	//싱글턴
 	
 	private int randScore() {
 		return (int)(Math.random()* 41 +60);
@@ -96,6 +111,7 @@ public class StudentService { // 핵심 로직 클래스
 			Student tmp = new Student(no, name, kor, eng, mat);
 			students.add(tmp); //생성자 호출로 데이터 입력
 			sortedStudent.add(tmp);
+			Collections.sort(students);
 			rank();
 		
 	}
@@ -215,20 +231,37 @@ public class StudentService { // 핵심 로직 클래스
 	//총점 정렬
 	private void rank() { 
 		System.out.println("학생들의 총점을 기준으로 석차정렬");
+		//1. list.sort()
+//		sortedStudent.sort(new Comparator<Student>() {
+//
+//			@Override
+//			public int compare(Student o1, Student o2) {
+//				// TODO Auto-generated method stub
+//				return o2.total() - o1.total();
+////				return Double.compare(o2.avg(), o1.avg()); //평균으로 내림차순
+//			}
+//		});
 		
-		for(int i = 0; i <sortedStudent.size() - 1 ;i++) {
-			int idx = i;
-			for(int j = 1 + i; j < sortedStudent.size() ; j++) {
-				if(sortedStudent.get(idx).total() < sortedStudent.get(j).total()) {
-					idx = j;
-				}
-			}
-			Student tmp = sortedStudent.get(i);
-			sortedStudent.set(i, sortedStudent.get(idx));
-			
-//			sortedStudents[i] = sortedStudents[idx];
-			sortedStudent.set(idx, tmp);
-		}
+		//2. TreeSet()
+//		sortedStudent = new ArrayList<>(new TreeSet<>(sortedStudent)) ;
+		//3. collections
+		Collections.sort(sortedStudent, (o1, o2) -> o2.total() - o1.total()); //student에 구현
+		
+		
+		
+//		for(int i = 0; i <sortedStudent.size() - 1 ;i++) {
+//			int idx = i;
+//			for(int j = 1 + i; j < sortedStudent.size() ; j++) {
+//				if(sortedStudent.get(idx).total() < sortedStudent.get(j).total()) {
+//					idx = j;
+//				}
+//			}
+//			Student tmp = sortedStudent.get(i);
+//			sortedStudent.set(i, sortedStudent.get(idx));
+//			
+////			sortedStudents[i] = sortedStudents[idx];
+//			sortedStudent.set(idx, tmp);
+//		}
 					
 //		int[] arr = {5,4,3,2,1}; // 버블 정렬의 과정예시
 //		for(int i = 0; i < arr.length-1; i++) {
@@ -245,6 +278,9 @@ public class StudentService { // 핵심 로직 클래스
 		
 		
 	}
+
+	
+	
 	
 	private Student findBy(int no) { //중복체크, 명명 규칙
 		Student student = null;

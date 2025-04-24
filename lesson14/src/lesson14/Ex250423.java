@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class Ex250423 {
 	public static void main(String[] args) {
@@ -37,15 +38,39 @@ class countLetters{
 		String[] tmp = str.split("");
 		Map<String, Integer> map = new HashMap<>();
 		
-		for (String s : tmp) {
-            if (s.matches("[a-zA-Z]")) {
-            	if (map.containsKey(s)) {
-            	    map.put(s, map.get(s) + 1); // 이미 존재하면 값 증가
-            	} else {
-            	    map.put(s, 1); // 처음 등장한 문자면 1로 초기화
-            	}
-            }
-        }
+//		for (String s : tmp) {
+//        	if (map.containsKey(s)) {
+//        	    map.put(s, map.get(s) + 1); // 이미 존재하면 값 증가
+//        	} else {
+//        	    map.put(s, 1); // 처음 등장한 문자면 1로 초기화
+//        	}
+//        }
+		
+//		for(String s : tmp) {
+//			Integer i = map.get(s);
+////			if(i == null) {
+////				map.put(s, 1);
+////			}
+////			else {
+////				map.put(s, i+1);
+////			}
+////		}
+////		System.out.println(map);
+///		// 3항 연산
+//		for(String s : tmp) {
+//			Integer i = map.get(s);
+//			map.put(s, i == null ? 1: i + 1);
+//		}
+		// stream
+		Stream.of(tmp).forEach(s->{
+			Integer i = map.get(s);
+			map.put(s, i == null ? 1 : i + 1);
+			System.out.println(map);
+		});
+			
+		
+			
+			
 		
 		for (Map.Entry<String, Integer> entry : map.entrySet()) {
             System.out.println(entry.getKey() + "의 개수 : " + entry.getValue());
