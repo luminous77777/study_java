@@ -9,7 +9,7 @@ public class FileEx {
 	public static void main(String[] args) throws Exception {
 		// 1gb
 		// 1024 * 1024 * 1024
-		
+
 //		File file = new File("1gb.txt");
 //		FileWriter writer = new FileWriter(file);
 //		BufferedWriter bw = new BufferedWriter(writer); 
@@ -18,15 +18,15 @@ public class FileEx {
 //		}
 //		bw.close();
 //		writer.close();
-		
+
 		File folder = new File("1000files");
 		folder.mkdirs();
-		
-		for(int i = 0; i < 1024 ; i++) {
-			File file = new File("1000files\\"+i+".txt");
+
+		for (int i = 0; i < 1024; i++) {
+			File file = new File("1000files\\" + i + ".txt");
 			FileWriter writer = new FileWriter(file);
-			BufferedWriter bw = new BufferedWriter(writer); 
-			for(int j = 0; j < 1024 * 1024; j++) {
+			BufferedWriter bw = new BufferedWriter(writer);
+			for (int j = 0; j < 1024 * 1024; j++) {
 				bw.write('B');
 			}
 			bw.close();

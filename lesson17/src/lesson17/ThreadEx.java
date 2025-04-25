@@ -9,40 +9,41 @@ public class ThreadEx {
 		myThread2.start();
 		Thread thread = new Thread(new MyRunable());
 		Thread thread2 = new Thread(() -> {
-			for(int i = 0; i < 50 ; i++) {
-				System.out.println(i+ " :: Thread ::" + Thread.currentThread().getName());			
+			for (int i = 0; i < 50; i++) {
+				System.out.println(i + " :: Thread ::" + Thread.currentThread().getName());
 			}
 		});
-		
+
 		thread.start();
 //		myThread.run();
 		System.out.println(Thread.currentThread().getName());
 		System.out.println("main 종료");
-		
+
 	}
 }
-class MyThread extends Thread{
+
+class MyThread extends Thread {
 
 	@Override
 	public void run() {
 		test();
-		for(int i = 0; i < 50 ; i++) {
-			System.out.println(i+ " :: Thread ::" + getName());			
+		for (int i = 0; i < 50; i++) {
+			System.out.println(i + " :: Thread ::" + getName());
 		}
 	}
-	
+
 	void test() {
 		System.out.println("test");
 	}
 }
 
-class MyRunable implements Runnable{
+class MyRunable implements Runnable {
 
 	@Override
 	public void run() {
-		for(int i = 0; i < 50 ; i++) {
-			System.out.println(i+ " :: Thread ::" + Thread.currentThread().getName());			
+		for (int i = 0; i < 50; i++) {
+			System.out.println(i + " :: Thread ::" + Thread.currentThread().getName());
 		}
 	}
-	
+
 }

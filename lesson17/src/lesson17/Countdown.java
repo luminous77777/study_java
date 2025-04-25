@@ -9,8 +9,8 @@ public class Countdown {
 //			System.out.println(i);
 //			Thread.sleep(1000);
 //		}
-		
-		IntStream.rangeClosed(1, 10).boxed().sorted(Comparator.reverseOrder()).forEach(i->{
+
+		IntStream.rangeClosed(1, 10).boxed().sorted(Comparator.reverseOrder()).forEach(i -> {
 			System.out.println(i);
 			try {
 				Thread.sleep(1000);
