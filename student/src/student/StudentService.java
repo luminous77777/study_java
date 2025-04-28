@@ -37,9 +37,7 @@ public class StudentService { // 핵심 로직 클래스
 	
 	private static StudentService studentService = new StudentService(); // 한번만 초기화
 	private StudentService() { // 생성자를 직접생성 금지
-		
 	}
-	
 	public static StudentService getInstance() {
 		return studentService;
 	}

@@ -42,7 +42,6 @@ public class StudentMain {
 					return;
 				default:
 					System.out.println("지정된 범위의 숫자만 입력해주세요");
-					
 					break;
 			}
 				
