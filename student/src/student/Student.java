@@ -9,7 +9,7 @@ public class Student implements Comparable<Student>{
 	//고유키
 	private int no;
 	private String name;
-	private int kor;
+	private int kor = 1;
 	private int eng;
 	private int mat;
 
@@ -20,7 +20,7 @@ public class Student implements Comparable<Student>{
 	
 	
 	
-	public Student(int no, String name){ //학번과 이름만 넣는 생성자, 괄호 안에 넣는 그대로 보인다.
+	public Student(int no, String name){ //학번과 이름만 넣는 생성자, 괄호 안에 넣는 그대로 보인다
 		this.no = no;
 		this.name = name;
 	}
@@ -98,7 +98,7 @@ public class Student implements Comparable<Student>{
 
 	@Override
 	public int compareTo(Student o) {
-		// TODO Auto-generated method stub
+
 		return name.compareTo(o.name);
 	}
 	

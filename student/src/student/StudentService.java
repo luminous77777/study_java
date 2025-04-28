@@ -243,6 +243,7 @@ public class StudentService { // 핵심 로직 클래스
 		//2. TreeSet()
 //		sortedStudent = new ArrayList<>(new TreeSet<>(sortedStudent)) ;
 		//3. collections
+		
 		Collections.sort(sortedStudent, (o1, o2) -> o2.total() - o1.total()); //student에 구현
 		
 		

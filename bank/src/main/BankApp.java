@@ -5,7 +5,7 @@ import utils.BankUtils;
 
 public class BankApp {
 	public static void main(String[] args) {
-		while (true) {
+		while (true) { 
 			System.out.println(" __       __          _______   ______  __    __ __    __ \r\n"
 					+ "|  \\     /  \\        |       \\ /      \\|  \\  |  \\  \\  /  \\\r\n"
 					+ "| ▓▓\\   /  ▓▓__    __| ▓▓▓▓▓▓▓\\  ▓▓▓▓▓▓\\ ▓▓\\ | ▓▓ ▓▓ /  ▓▓\r\n"
