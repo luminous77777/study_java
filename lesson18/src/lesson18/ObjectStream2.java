@@ -19,5 +19,5 @@ public class ObjectStream2 {
 		}
 		System.out.println(o);
 
-	}
+	}		
 }
