@@ -102,6 +102,15 @@ public class CustomerService {
 	public Customer editInfo() {//정보수정
 		Customer customer = getLoginCustomer();
 		
+		int no = BankUtils.nextInt("수정할 데이터선택 해주세요 1. 이름 2.전화번호 3.이메일 4.아이디 5.비밀번호");
+//		switch (no) {
+//		case value: {
+//			
+//			yield type;
+//		}
+//		default:
+//			throw new IllegalArgumentException("Unexpected value: " + key);
+//		}
 		String name = BankUtils.nextLine("이름을 입력해주세요>");
 		checkName(name);
 		
