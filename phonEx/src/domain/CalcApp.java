@@ -8,7 +8,7 @@ public class CalcApp extends App{
 	}
 
 	@Override
-	void run() {
+	public void run() {
 		super.run();
 		System.out.println("계산기 실행");
 	}

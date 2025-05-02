@@ -8,8 +8,18 @@ public class MemoApp extends App{
 	}
 
 	@Override
-	void run() {
+	public void run() {
+		// TODO Auto-generated method stub
 		super.run();
-		System.out.println("메모 실행");
 	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return super.getName();
+	}
+	
+	
+
+
 }

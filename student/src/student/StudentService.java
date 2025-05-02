@@ -1,11 +1,19 @@
 package student;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
+@SuppressWarnings("unchecked")
 public class StudentService { // 핵심 로직 클래스
 	private List<Student> students = new ArrayList<Student>();
 	
@@ -20,15 +28,24 @@ public class StudentService { // 핵심 로직 클래스
 	
 	{ // 초기화 블록. 기본값 매번 넣기 귀찮아서 있는것.
 		
-		students.add(new Student(4, "A", randScore(),randScore(),randScore()));
-		students.add(new Student(5, "B", randScore(),randScore(),randScore()));
-		students.add(new Student(8, "C", randScore(),randScore(),randScore()));
-		students.add(new Student(2, "D", randScore(),randScore(),randScore()));
-		students.add(Student.builder().no(6).eng(randScore()).kor(randScore()).mat(randScore()).name("kkim").build());
-		
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(new FileInputStream("data/student.ser"));
+			students = (List<Student>) ois.readObject();
+			ois.close();
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("파일을 불러 올 수 없습니다. 임시 데이터셋으로 진행합니다.");
+			students.add(new Student(4, "A", randScore(),randScore(),randScore()));
+			students.add(new Student(5, "B", randScore(),randScore(),randScore()));
+			students.add(new Student(8, "C", randScore(),randScore(),randScore()));
+			students.add(new Student(2, "D", randScore(),randScore(),randScore()));
+			students.add(Student.builder().no(6).eng(randScore()).kor(randScore()).mat(randScore()).name("kkim").build());
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 //		students[count++] = new Student(1, "A", randScore(), randScore(), randScore());//랜덤값을 적게 하기.
-
-		
 //		sortedStudents = Arrays.copyOf(students, students.length);
 		sortedStudent = new ArrayList<Student>(students);
 		rank();
@@ -111,6 +128,7 @@ public class StudentService { // 핵심 로직 클래스
 			sortedStudent.add(tmp);
 			Collections.sort(students);
 			rank();
+			save();
 		
 	}
 
@@ -162,6 +180,7 @@ public class StudentService { // 핵심 로직 클래스
 
 			s.modify(kor, eng, mat); //setter로 하나씩 바꾸는 방법도 있다
 			rank();
+			save();
 
 		
 		
@@ -182,6 +201,7 @@ public class StudentService { // 핵심 로직 클래스
 		
 		students.remove(s);
 		sortedStudent.remove(s);
+		save();
 //		for(int i = 0; i < students.size() ; i++) {
 //			if(students.get(i).getNo() == no) {
 //				students.remove(i);
@@ -276,6 +296,24 @@ public class StudentService { // 핵심 로직 클래스
 //		}
 		
 		
+	}
+	
+	private void save() {
+		try {
+			File file = new File("data");
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			
+			
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(file, "data/student.ser")));
+			oos.writeObject(students);
+			oos.close();
+		}
+		catch (IOException e) {
+			System.out.println("파일 접근 권한이 없습니다");
+			e.printStackTrace();
+		}
 	}
 
 	

@@ -1,9 +1,10 @@
 package student;
 
+import java.io.Serializable;
 import java.lang.Thread.Builder;
 
 // Data class
-public class Student implements Comparable<Student>{
+public class Student implements Comparable<Student>, Serializable{
 	
 	//인스턴스 변수로 대부분 구성
 	//고유키
