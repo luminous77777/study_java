@@ -8,9 +8,10 @@ public class Deck {
 	List<Card> cards = new ArrayList<Card>();
 	
 	{ // 초기화 블럭
+		Kind[] kinds = Kind.values();
 		for(int i = 0; i <4 ;i++) { //아니면 카운트로 하여도 된다
 			for(int j = 0; j <13 ; j++) {
-				cards.add(new Card(i,j));
+				cards.add(new Card(kinds[i],j));
 			}
 		}
 	}

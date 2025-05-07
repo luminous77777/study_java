@@ -6,6 +6,18 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 		play();
+//		Card card = new Card(Kind.CLOVER, 0);
+//		System.out.println(card);
+//		card.kind = Kind.SPACE;
+//		System.out.println(card.kind);
+//		
+//		Kind kind = Kind.DIAMOND;
+//		Kind kind2 = Kind.HEART;
+//		System.out.println(kind.ordinal());
+//		System.out.println(kind == kind2);
+//		System.out.println(kind.name());
+//		System.out.println(kind2.getName());
+		
 	}
 	
 	static void play() {
