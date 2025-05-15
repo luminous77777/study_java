@@ -14,7 +14,7 @@ public class Account {
 	// 한도
 	private long limit =1_000_000;
 	// 개설일
-	private Date date = new Date();;
+	private Date date = new Date();
 	
 
 	public Account() {

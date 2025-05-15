@@ -69,9 +69,9 @@ public class BankService { //UI담당
 				}
 		} catch (NumberFormatException e) {
 			System.out.println("정확힌 숫자를 입력해주세요");
-		}catch	(IllegalArgumentException e){
+		} catch	(IllegalArgumentException e){
 			System.out.println(e.getMessage());
-		}catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
 		
